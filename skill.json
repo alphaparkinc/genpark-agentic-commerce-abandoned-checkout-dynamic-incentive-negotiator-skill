@@ -1,0 +1,77 @@
+{
+  "name": "genpark-agentic-commerce-abandoned-checkout-dynamic-incentive-negotiator-skill",
+  "title": "Abandoned Checkout Dynamic Incentive Negotiator Skill",
+  "version": "1.0.0",
+  "description": "High-intent cart abandonment exit-intent detection, customer lifetime value (LTV) tiering, margin-bounded dynamic coupon negotiation, and automated checkout recovery orchestrator. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "organization": {
+    "name": "GenPark Inc.",
+    "url": "https://www.genpark.ai",
+    "linkedin": "https://www.linkedin.com/company/92955550"
+  },
+  "mcp_version": "2024-11-05",
+  "category": "agentic-commerce",
+  "tools": [
+    {
+      "name": "evaluate_abandoned_cart_incentive",
+      "description": "Calculate optimal dynamic discount or sweetener incentive based on gross margin floor, customer historical LTV, and cart abandonment elapsed time.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cart_value_usd": {
+            "type": "number"
+          },
+          "product_margin_pct": {
+            "type": "number",
+            "description": "e.g. 45.0 for 45%"
+          },
+          "customer_ltv_usd": {
+            "type": "number"
+          },
+          "abandonment_minutes_elapsed": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "cart_value_usd",
+          "product_margin_pct",
+          "customer_ltv_usd",
+          "abandonment_minutes_elapsed"
+        ]
+      }
+    },
+    {
+      "name": "generate_recovery_dispatch_payload",
+      "description": "Format tailored multi-channel re-engagement payload (SMS, WhatsApp, Email, In-app push) with countdown expiry and single-click checkout link.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string"
+          },
+          "cart_id": {
+            "type": "string"
+          },
+          "approved_discount_pct": {
+            "type": "number"
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "sms",
+              "whatsapp",
+              "email",
+              "push"
+            ]
+          }
+        },
+        "required": [
+          "customer_id",
+          "cart_id",
+          "approved_discount_pct",
+          "channel"
+        ]
+      }
+    }
+  ]
+}
